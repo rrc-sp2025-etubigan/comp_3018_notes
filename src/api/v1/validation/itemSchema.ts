@@ -89,7 +89,15 @@ export const itemSchemas = {
     // DELETE deleteItem
     delete: {
         params: Joi.object({
-
+            id: Joi.string()
+                .required()
+                .alphanum()
+                .messages({
+                    "any.required": "id is required",
+                    "string.empty": "id must not be empty",
+                    "string.alphanum": "id contains only alphanumeric \
+                                        characters",
+                }),
         }),
     },
 
