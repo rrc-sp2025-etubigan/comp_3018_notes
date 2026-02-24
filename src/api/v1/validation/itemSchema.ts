@@ -40,7 +40,15 @@ export const itemSchemas = {
     // GET getItemById
     getItemById: {
         params: Joi.object({
-
+            id: Joi.string()
+                .required()
+                .alphanum()
+                .messages({
+                    "any.required": "id is required",
+                    "string.empty": "id must not be empty",
+                    "string.alphanum": "id contains only alphanumeric \
+                                        characters",
+                }),
         }),
     },
 
