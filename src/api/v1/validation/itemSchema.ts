@@ -55,10 +55,34 @@ export const itemSchemas = {
     // PUT updateItem
     update: {
         params: Joi.object({
-
+            id: Joi.string()
+                .required()
+                .alphanum()
+                .messages({
+                    "any.required": "id is required",
+                    "string.empty": "id must not be empty",
+                    "string.alphanum": "id contains only alphanumeric \
+                                        characters",
+                }),
         }),
         body: Joi.object({
-
+            quantity: Joi.number()
+                .optional()
+                .integer()
+                .positive()
+                .messages({
+                    "number.empty": "number cannot be empty",
+                    "number.integer": "number must be an integer value",
+                    "number.positive": "number must be a positive value",
+                }),
+            category: Joi.string()
+                .optional()
+                .valid("clothing", "tool", "food")
+                .messages({
+                    "string.empty": "category must not be empty",
+                    "any.valid": "category must these valid values \
+                                  [clothing, tool, food]",
+                }),
         }),
     },
 
