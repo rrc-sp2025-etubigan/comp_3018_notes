@@ -26,7 +26,7 @@ const createId = async(): Promise<string> => {
 export const createDocument = async<T>(
     collectionName: string,
     data: Partial<T>,
-): Promise<string | null> => {
+): Promise<string> => {
     try {
         const id = await createId();
         await db.collection(collectionName).doc(id).set(data);

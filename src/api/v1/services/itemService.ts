@@ -12,7 +12,16 @@ export const createItem = async(
     },
 ): Promise<Item> => {
     try {
-        
+        const newItem = {
+            ...data,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+        };
+
+        const id = await firestoreRepository
+            .createDocument<Item>(COLLECTION, newItem);
+
+        return { id, ...newItem };
     } catch (error: unknown) {
         const errorMessage = 
             error instanceof Error ? error.message : "Unknown Error";
