@@ -59,7 +59,16 @@ export const getDocumentById = async<T>(
     id: string
 ): Promise<T | null> => {
     try {
-        
+        let docRef: FirebaseFirestore.DocumentReference;
+        docRef = db.collection(collectionName).doc(id);
+        const snapshot = await docRef.get();
+
+        if (!snapshot) return null;
+
+        return {
+            id: snapshot.id,
+            ...(snapshot.data() as T),
+        };
     } catch (error:unknown) {
         const errorMessage = 
             error instanceof Error ? error.message : "Unknown Error";
