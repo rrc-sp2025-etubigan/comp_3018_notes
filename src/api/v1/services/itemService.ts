@@ -67,7 +67,25 @@ export const updateItem = async(
     data: Pick<Item, "name" | "quantity" | "category">
 ): Promise<Item> => {
     try {
+        let updateData: Partial<Item> = {}
+
+        if (data.name != undefined) updateData.name = data.name;
+        if (data.quantity != undefined) updateData.quantity = data.quantity;
+        if (data.category != undefined) updateData.category = data.category;
+
+        if (Object.keys(data).length === 0) 
+            throw new Error("No fields to provided to update with");
+
+        updateData.updatedAt = new Date().toISOString();
+
+        await firestoreRepository.updateDocument(COLLECTION, id, updateData);
+
+        const updatedItem = await firestoreRepository
+                                    .getDocumentById<Item>(COLLECTION, id);
         
+        if (!updatedItem) throw new Error("Updated item not found");
+        
+        return updatedItem;
     } catch (error:unknown) {
         const errorMessage = 
             error instanceof Error ? error.message : "Unknown Error";
