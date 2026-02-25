@@ -51,7 +51,8 @@ export const getItemById = async(
 // GET getAllItems
 export const getAllItems = async(): Promise<Item[]> => {
     try {
-        
+        return (await firestoreRepository
+                                .getAllDocuments<Item>(COLLECTION));
     } catch (error:unknown) {
         const errorMessage = 
             error instanceof Error ? error.message : "Unknown Error";
