@@ -54,8 +54,8 @@ export const getAllDocuments = async<T>(
     } catch (error:unknown) {
         const errorMessage = 
             error instanceof Error ? error.message : "Unknown Error";
-        throw new Error(`Failed to retrieve all \
-                         documents: ${errorMessage}`);
+        throw new Error("Failed to retrieve all " +
+                         `documents: ${errorMessage}`);
     }
 };
 
@@ -78,8 +78,8 @@ export const getDocumentById = async<T>(
     } catch (error:unknown) {
         const errorMessage = 
             error instanceof Error ? error.message : "Unknown Error";
-        throw new Error(`Failed to retrieve document by \
-                         id(${id}): ${errorMessage}`);
+        throw new Error("Failed to retrieve document by " +
+                         `id(${id}): ${errorMessage}`);
     }
 };
 
@@ -97,8 +97,8 @@ export const updateDocument = async<T>(
     } catch (error:unknown) {
         const errorMessage = 
             error instanceof Error ? error.message : "Unknown Error";
-        throw new Error(`Failed to update document with \
-                         id(${id}): ${errorMessage}`);
+        throw new Error("Failed to update document with "+
+                         `id(${id}): ${errorMessage}`);
     }
 };
 
@@ -112,7 +112,7 @@ export const deleteDocument = async<T>(
     } catch (error:unknown) {
         const errorMessage = 
             error instanceof Error ? error.message : "Unknown Error";
-        throw new Error(`Failed to delete document with \
-                         id(${id}): ${errorMessage}`);
+        throw new Error("Failed to delete document with " +
+                         `id(${id}): ${errorMessage}`);
     }
 };

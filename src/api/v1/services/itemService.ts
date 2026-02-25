@@ -25,7 +25,7 @@ export const createItem = async(
     } catch (error: unknown) {
         const errorMessage = 
             error instanceof Error ? error.message : "Unknown Error";
-        throw new Error(`Failed to create item: ${errorMessage}`);
+        throw new Error(errorMessage);
     }
 };
 
@@ -43,8 +43,7 @@ export const getItemById = async(
     } catch (error:unknown) {
         const errorMessage = 
             error instanceof Error ? error.message : "Unknown Error";
-        throw new Error(`Failed to retrieve \
-                         item by id: ${errorMessage}`);
+        throw new Error(errorMessage);
     }
 };
 
@@ -56,8 +55,7 @@ export const getAllItems = async(): Promise<Item[]> => {
     } catch (error:unknown) {
         const errorMessage = 
             error instanceof Error ? error.message : "Unknown Error";
-        throw new Error(`Failed to retrieve all \
-                         items: ${errorMessage}`);
+        throw new Error(errorMessage);
     }
 };
 
@@ -89,8 +87,7 @@ export const updateItem = async(
     } catch (error:unknown) {
         const errorMessage = 
             error instanceof Error ? error.message : "Unknown Error";
-        throw new Error(`Failed to update \
-                         item: ${errorMessage}`);
+        throw new Error(errorMessage);
     }
 };
 
@@ -103,7 +100,6 @@ export const deleteItem = async(
     } catch (error: unknown) {
         const errorMessage = 
             error instanceof Error ? error.message : "Unknown Error";
-        throw new Error(`Failed to delete \
-                         item: ${errorMessage}`);
+        throw new Error(errorMessage);
     }
 };
