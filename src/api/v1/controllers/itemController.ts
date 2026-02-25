@@ -32,9 +32,17 @@ export const getItemByIdHandler = async(
     next: NextFunction,
 ): Promise<void> => {
     try {
-        
+        const { id } = req.params;
+
+        const item = await itemServices.getItemById(id as string);
+
+        res.status(HTTP_STATUS.OK).json(
+            successResponse(item, "Item successfully retrieved")
+        );
     } catch (error:unknown) {
-        
+        const errorMessage =
+            error instanceof Error ? error.message : "Unknown Error";
+        res.status(HTTP_STATUS.BAD_REQUEST).json(errorResponse(errorMessage));
     }
 };
 
