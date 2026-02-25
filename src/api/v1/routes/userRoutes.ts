@@ -3,14 +3,14 @@ import { getUserDetails } from "../controllers/userController";
 import authenticate from "../middleware/authenticate";
 import isAuthorized from "../middleware/authorize";
 
-const router: Router = express.Router();
+const userRouter: Router = express.Router();
 
 // Only admins can view detailed user information
-router.get(
+userRouter.get(
     "/:id",
     authenticate,
     isAuthorized({ hasRole: ["admin"] }),
     getUserDetails
 );
 
-export default router;
+export default userRouter;
