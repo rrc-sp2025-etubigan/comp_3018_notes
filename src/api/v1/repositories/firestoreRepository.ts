@@ -83,7 +83,10 @@ export const updateDocument = async<T>(
     data: Partial<T>
 ) => {
     try {
+        let docRef: FirebaseFirestore.DocumentReference;
+        docRef = db.collection(collectionName).doc(id);
         
+        docRef.update(data);
     } catch (error:unknown) {
         const errorMessage = 
             error instanceof Error ? error.message : "Unknown Error";
