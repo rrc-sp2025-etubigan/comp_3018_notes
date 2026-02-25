@@ -100,7 +100,7 @@ export const deleteDocument = async<T>(
     id: string,
 ): Promise<void> => {
     try {
-        
+        db.collection(collectionName).doc(id).delete;
     } catch (error:unknown) {
         const errorMessage = 
             error instanceof Error ? error.message : "Unknown Error";
