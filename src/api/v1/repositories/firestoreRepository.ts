@@ -2,13 +2,18 @@ import { db } from "../../../config/firebaseConfig";
 
 const createId = async(): Promise<string> => {
     try {
-        const itemInfoSnapshot = await db.collection("item-info").
-            doc("item-global-metrics").get();
-        const { ...data } = itemInfoSnapshot.data();
-        const padded_num = ((data["count"] as number) + 1).
-            toString().padStart(5, "0");
+        const docRef = db.collection("item-info").
+            doc("item-global-metrics");
+        const snapshot = await docRef.get();
+        const { ...data } = snapshot.data();
+
+        const newCount = (data["count"] as number) + 1;
+        const padded_num = newCount.toString().padStart(5, "0");
         const id = `itemId_${padded_num}`;
 
+        docRef.update({
+            "count": newCount,
+        });
         return id;
     } catch (error:unknown) {
         const errorMessage =
