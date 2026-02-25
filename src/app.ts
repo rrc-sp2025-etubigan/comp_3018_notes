@@ -8,6 +8,7 @@ import errorHandler from "./api/v1/middleware/errorHandler";
 // import the item routes from the new routes file
 import itemRouter from "./api/v1/routes/itemRoutes";
 import userRouter from "./api/v1/routes/userRoutes";
+import adminRouter from "./api/v1/routes/adminRoutes";
 
 const app: Express = express();
 
@@ -28,6 +29,9 @@ app.use("/api/v1/items", itemRouter);
 
 // Route handler for users
 app.use("/api/v1/users", userRouter);
+
+// Route handler for admins
+app.use("/api/v1/admin", adminRouter);
 
 // Global error handling middleware (MUST be applied last)
 app.use(errorHandler);
