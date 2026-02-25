@@ -34,7 +34,12 @@ export const getItemById = async(
     id: string,
 ): Promise<Item> => {
     try {
+        const item = await firestoreRepository
+                                .getDocumentById<Item>(COLLECTION, id);
+
+        if (!item) throw new Error(`Item with id ${id} not found`);
         
+        return item
     } catch (error:unknown) {
         const errorMessage = 
             error instanceof Error ? error.message : "Unknown Error";
