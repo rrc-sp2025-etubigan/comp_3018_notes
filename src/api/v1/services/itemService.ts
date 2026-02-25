@@ -99,7 +99,7 @@ export const deleteItem = async(
     id: string,
 ): Promise<void> => {
     try {
-        
+        await firestoreRepository.deleteDocument(COLLECTION, id);
     } catch (error: unknown) {
         const errorMessage = 
             error instanceof Error ? error.message : "Unknown Error";
