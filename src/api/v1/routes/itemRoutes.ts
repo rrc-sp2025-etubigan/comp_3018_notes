@@ -5,4 +5,10 @@ import { itemSchemas } from "../validation/itemSchema";
 
 const itemRouter = express.Router();
 
+itemRouter.post("/", validateRequest(itemSchemas.create), itemController.createItemHandler);
+itemRouter.get("/", itemController.getAllItemsHandler);
+itemRouter.get("/:id", validateRequest(itemSchemas.getItemById), itemController.getItemByIdHandler);
+itemRouter.put("/:id", validateRequest(itemSchemas.update), itemController.updateItemHandler);
+itemRouter.delete("/:id", validateRequest(itemSchemas.delete), itemController.deleteItemHandler);
+
 export default itemRouter;
