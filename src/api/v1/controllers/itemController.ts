@@ -73,9 +73,19 @@ export const updateItemHandler = async(
     next: NextFunction,
 ): Promise<void> => {
     try {
-        
+        const { id } = req.params;
+        const { name, quantity, category} = req.body;
+        const data = { name, quantity, category };
+
+        const updatedItem = await itemServices.updateItem(id as string, data);
+
+        res.status(HTTP_STATUS.OK).json(
+            successResponse(updatedItem, "Successfully updated item.")
+        );
     } catch (error:unknown) {
-        
+        const errorMessage =
+            error instanceof Error ? error.message : "Unknown Error";
+        res.status(HTTP_STATUS.BAD_REQUEST).json(errorResponse(errorMessage));
     }
 };
 
