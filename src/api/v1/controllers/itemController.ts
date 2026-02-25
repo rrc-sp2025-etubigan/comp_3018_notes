@@ -53,9 +53,16 @@ export const getAllItemsHandler = async(
     next: NextFunction,
 ): Promise<void> => {
     try {
-        
+        const { ...items } = await itemServices.getAllItems();
+        const count = items.length;
+
+        res.status(HTTP_STATUS.OK).json(
+            successResponse({count, items}, "Items successfully retrieved")
+        );
     } catch (error:unknown) {
-        
+        const errorMessage =
+            error instanceof Error ? error.message : "Unknown Error";
+        res.status(HTTP_STATUS.BAD_REQUEST).json(errorResponse(errorMessage));
     }
 };
 
