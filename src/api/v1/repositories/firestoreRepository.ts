@@ -69,7 +69,7 @@ export const getDocumentById = async<T>(
         docRef = db.collection(collectionName).doc(id);
         const snapshot = await docRef.get();
 
-        if (!snapshot) return null;
+        if (!(snapshot.exists)) return null;
 
         return {
             id: snapshot.id,
