@@ -2,3 +2,5 @@ node_modules/*
 .vscode/
 comp3018-personal-notes-firebase-adminsdk-fbsvc-8a0ee91b23.json
 package-lock.json
+logs/
+*.logs
