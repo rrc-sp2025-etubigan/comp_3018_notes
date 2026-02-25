@@ -42,12 +42,9 @@ export const itemSchemas = {
         params: Joi.object({
             id: Joi.string()
                 .required()
-                .alphanum()
                 .messages({
                     "any.required": "id is required",
                     "string.empty": "id must not be empty",
-                    "string.alphanum": "id contains only alphanumeric \
-                                        characters",
                 }),
         }),
     },
@@ -57,12 +54,9 @@ export const itemSchemas = {
         params: Joi.object({
             id: Joi.string()
                 .required()
-                .alphanum()
                 .messages({
                     "any.required": "id is required",
                     "string.empty": "id must not be empty",
-                    "string.alphanum": "id contains only alphanumeric \
-                                        characters",
                 }),
         }),
         body: Joi.object({
@@ -91,12 +85,9 @@ export const itemSchemas = {
         params: Joi.object({
             id: Joi.string()
                 .required()
-                .alphanum()
                 .messages({
                     "any.required": "id is required",
                     "string.empty": "id must not be empty",
-                    "string.alphanum": "id contains only alphanumeric \
-                                        characters",
                 }),
         }),
     },
