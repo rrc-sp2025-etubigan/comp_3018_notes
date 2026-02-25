@@ -39,7 +39,13 @@ export const getAllDocuments = async<T>(
     collectionName: string,
 ): Promise<T[]> => {
     try {
-        
+        let collectRef: FirebaseFirestore.CollectionReference; 
+        collectRef = db.collection(collectionName);
+
+        return (await collectRef.get()).docs.map(docs => ({
+            id: docs.id,
+            ... (docs.data() as T),
+        }));
     } catch (error:unknown) {
         const errorMessage = 
             error instanceof Error ? error.message : "Unknown Error";
