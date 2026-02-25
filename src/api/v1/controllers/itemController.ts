@@ -20,9 +20,7 @@ export const createItemHandler = async(
             successResponse(newItem, "Item successfully created")
         );
     } catch (error:unknown) {
-        const errorMessage =
-            error instanceof Error ? error.message : "Unknown Error";
-        res.status(HTTP_STATUS.BAD_REQUEST).json(errorResponse(errorMessage, ""));
+        next(error);
     }
 };
 
@@ -41,9 +39,7 @@ export const getItemByIdHandler = async(
             successResponse(item, "Item successfully retrieved")
         );
     } catch (error:unknown) {
-        const errorMessage =
-            error instanceof Error ? error.message : "Unknown Error";
-        res.status(HTTP_STATUS.BAD_REQUEST).json(errorResponse(errorMessage, ""));
+        next(error);
     }
 };
 
@@ -61,9 +57,7 @@ export const getAllItemsHandler = async(
             successResponse({count, items}, "Items successfully retrieved")
         );
     } catch (error:unknown) {
-        const errorMessage =
-            error instanceof Error ? error.message : "Unknown Error";
-        res.status(HTTP_STATUS.BAD_REQUEST).json(errorResponse(errorMessage, ""));
+        next(error);
     }
 };
 
@@ -84,9 +78,7 @@ export const updateItemHandler = async(
             successResponse(updatedItem, "Successfully updated item.")
         );
     } catch (error:unknown) {
-        const errorMessage =
-            error instanceof Error ? error.message : "Unknown Error";
-        res.status(HTTP_STATUS.BAD_REQUEST).json(errorResponse(errorMessage, ""));
+        next(error);
     }
 };
 
@@ -104,8 +96,6 @@ export const deleteItemHandler = async(
             successResponse(undefined, "Successfully deleted item")
         );
     } catch (error:unknown) {
-        const errorMessage =
-            error instanceof Error ? error.message : "Unknown Error";
-        res.status(HTTP_STATUS.BAD_REQUEST).json(errorResponse(errorMessage, ""));
+        next(error);
     }
 };
