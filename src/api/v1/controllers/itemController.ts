@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import * as itemServices from "../services/itemService";
 import { successResponse, errorResponse } from "../models/responseModel";
+import errorHandler from "../middleware/errorHandler"
 import { HTTP_STATUS } from "../../../constants/httpConstants";
 
 // Controller for creating item
@@ -21,7 +22,7 @@ export const createItemHandler = async(
     } catch (error:unknown) {
         const errorMessage =
             error instanceof Error ? error.message : "Unknown Error";
-        res.status(HTTP_STATUS.BAD_REQUEST).json(errorResponse(errorMessage));
+        res.status(HTTP_STATUS.BAD_REQUEST).json(errorResponse(errorMessage, ""));
     }
 };
 
@@ -42,7 +43,7 @@ export const getItemByIdHandler = async(
     } catch (error:unknown) {
         const errorMessage =
             error instanceof Error ? error.message : "Unknown Error";
-        res.status(HTTP_STATUS.BAD_REQUEST).json(errorResponse(errorMessage));
+        res.status(HTTP_STATUS.BAD_REQUEST).json(errorResponse(errorMessage, ""));
     }
 };
 
@@ -62,7 +63,7 @@ export const getAllItemsHandler = async(
     } catch (error:unknown) {
         const errorMessage =
             error instanceof Error ? error.message : "Unknown Error";
-        res.status(HTTP_STATUS.BAD_REQUEST).json(errorResponse(errorMessage));
+        res.status(HTTP_STATUS.BAD_REQUEST).json(errorResponse(errorMessage, ""));
     }
 };
 
@@ -85,7 +86,7 @@ export const updateItemHandler = async(
     } catch (error:unknown) {
         const errorMessage =
             error instanceof Error ? error.message : "Unknown Error";
-        res.status(HTTP_STATUS.BAD_REQUEST).json(errorResponse(errorMessage));
+        res.status(HTTP_STATUS.BAD_REQUEST).json(errorResponse(errorMessage, ""));
     }
 };
 
@@ -105,6 +106,6 @@ export const deleteItemHandler = async(
     } catch (error:unknown) {
         const errorMessage =
             error instanceof Error ? error.message : "Unknown Error";
-        res.status(HTTP_STATUS.BAD_REQUEST).json(errorResponse(errorMessage));
+        res.status(HTTP_STATUS.BAD_REQUEST).json(errorResponse(errorMessage, ""));
     }
 };
