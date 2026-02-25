@@ -10,9 +10,18 @@ export const createItemHandler = async(
     next: NextFunction,
 ): Promise<void> => {
     try {
-        
+        const { name, quantity, category } = req.body;
+        const data = { name, quantity, category };
+
+        const newItem = await itemServices.createItem(data);
+
+        res.status(HTTP_STATUS.CREATED).json(
+            successResponse(newItem, "Item successfully created")
+        );
     } catch (error:unknown) {
-        
+        const errorMessage =
+            error instanceof Error ? error.message : "Unknown Error";
+        res.status(HTTP_STATUS.BAD_REQUEST).json(errorResponse(errorMessage));
     }
 };
 
