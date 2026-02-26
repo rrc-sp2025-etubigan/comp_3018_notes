@@ -11,8 +11,8 @@ export const itemSchemas = {
                 .messages({
                     "any.required": "name is required",
                     "string.empty": "name cannot be empty",
-                    "string.alphanum": "name must use alphanumeric \
-                                        characters only",
+                    "string.alphanum": "name must use alphanumeric " +
+                                       "characters only",
                     "string.max": "name maximum length is 24 characters",
                 }),
             quantity: Joi.number()
@@ -31,8 +31,8 @@ export const itemSchemas = {
                 .messages({
                     "any.required": "category is required",
                     "string.empty": "category must not be empty",
-                    "any.valid": "category must these valid values \
-                                  [clothing, tool, food]",
+                    "any.valid": "category must these valid values " +
+                                 "[clothing, tool, food]",
                 }),
         }),
     },
@@ -74,8 +74,8 @@ export const itemSchemas = {
                 .valid("clothing", "tool", "food")
                 .messages({
                     "string.empty": "category must not be empty",
-                    "any.valid": "category must these valid values \
-                                  [clothing, tool, food]",
+                    "any.valid": "category must these valid values " +
+                                 "[clothing, tool, food]",
                 }),
         }),
     },

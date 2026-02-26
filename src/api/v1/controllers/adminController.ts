@@ -32,7 +32,8 @@ export const setCustomClaims = async (
         res.status(HTTP_STATUS.OK).json(
             successResponse(
                 {},
-                `Custom claims set for user: ${uid}. User must obtain a new token for changes to take effect.`
+                `Custom claims set for user: ${uid}. User must obtain a new ` +
+                "token for changes to take effect."
             )
         );
     } catch (error) {
