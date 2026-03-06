@@ -1,10 +1,13 @@
 import request from "supertest";
 import app from "../src/app";
 import * as itemService from "../src/api/v1/services/itemService"
-import * as firestoreRepository from "../src/api/v1/repositories/firestoreRepository"
 import { auth } from "../config/firebaseConfig";
 
-jest.mock("../config/firebaseConfig");
+jest.mock("../config/firebaseConfig", () => ({
+    auth: {
+        verifyIdToken: jest.fn(),
+    },
+}));
 
 describe("POST /api/v1/items - Authentication and Authorization Integration",
     () => {
@@ -59,17 +62,8 @@ describe("POST /api/v1/items - Authentication and Authorization Integration",
     it("should succeed when user has proper role and token",
     async() => {
         // Arrange
-        (auth.verifyIdToken as jest.Mock).mockResolvedValueOnce({
-            uid: "admin123",
-            role: "admin",
-        });
-
-        const mockRepositoryResponse = {
-            id: "testId_001"
-        }
-
         const mockServiceResponse = {
-            ...mockRepositoryResponse,
+            id: "testId_001",
             name: "Test 3",
             quantity: 67,
             category: "food",
@@ -77,18 +71,22 @@ describe("POST /api/v1/items - Authentication and Authorization Integration",
             updatedAt: new Date().toISOString()
         };
 
-        (firestoreRepository.createDocument as jest.Mock).mockResolvedValueOnce({ id: "testId_001" });
+        jest.spyOn(itemService, "createItem")
+            .mockResolvedValueOnce(mockServiceResponse);
 
-        (itemService.createItem as jest.Mock).mockResolvedValue(mockServiceResponse);
+        (auth.verifyIdToken as jest.Mock).mockResolvedValueOnce({
+            uid: "admin123",
+            role: "admin",
+        });
         
         // Act
         const response = await request(app)
-        .post("/api/v1/items")
-        .set("Authorization", "Bearer valid-token")
-        .send({ name: "Test 3", quantity: 67, category: "food" });
+            .post("/api/v1/items")
+            .set("Authorization", "Bearer valid-token")
+            .send({ name: "Test3", quantity: 67, category: "food" });
         
         // Assert
         expect(response.status).toBe(201);
-        expect(response.body.success).toBe(true);
+        expect(response.body.status).toBe("success");
     })
 });
