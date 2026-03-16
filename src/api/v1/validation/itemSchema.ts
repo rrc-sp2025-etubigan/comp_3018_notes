@@ -133,3 +133,35 @@ export const itemSchemas = {
 
     // GET getAllItems - if applicable.
 };
+
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     Error:
+ *       type: object
+ *       required:
+ *         - error
+ *         - message
+ *       properties:
+ *         error:
+ *           type: string
+ *           description: Error type or code
+ *           example: "VALIDATION_ERROR"
+ *         message:
+ *           type: string
+ *           description: Human readable error-message
+ *           example: "Name cannot be empty"
+ *         details:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               field: 
+ *                 type: string
+ *                 example: name
+ *               issue:
+ *                 type: string
+ *                 example: "name cannot be empty"
+ *           description: Detailed validations errors (optional)
+ */
