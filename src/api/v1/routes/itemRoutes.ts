@@ -43,6 +43,12 @@ const itemRouter = express.Router();
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Items'
+ *       '400':
+ *         description: Invalid input data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
  */
 itemRouter.post(
     "/",
