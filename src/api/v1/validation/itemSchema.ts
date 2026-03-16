@@ -23,6 +23,10 @@ import Joi from "joi";
  *           type: number
  *           description: Current amount of items in stock
  *           example: 100
+ *         category:
+ *           type: string
+ *           enum: [clothing, tool, food]
+ *           example: "tool"
  *         createdAt:
  *           type: string
  *           format: date-time
