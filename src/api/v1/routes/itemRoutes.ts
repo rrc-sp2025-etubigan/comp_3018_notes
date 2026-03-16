@@ -58,6 +58,27 @@ itemRouter.post(
     itemController.createItemHandler
 );
 
+/**
+ * @openapi
+ * /items:
+ *   get:
+ *     summary: Retrieve all items
+ *     tags: [Items]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieve all items
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 count:
+ *                   type: integer
+ *                 items:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Items'
+ */
 itemRouter.get(
     "/",
     authenticate,
