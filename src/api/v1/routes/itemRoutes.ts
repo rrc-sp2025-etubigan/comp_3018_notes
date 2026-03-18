@@ -82,8 +82,39 @@ itemRouter.post(
 itemRouter.get(
     "/",
     authenticate,
-    itemController.getAllItemsHandler);
+    itemController.getAllItemsHandler
+);
 
+/**
+ * @openapi
+ * /items/{id}:
+ *   get:
+ *     summary: Retrieve one item by id
+ *     tags: [Items]
+ *     parameters:
+ *       - id:
+ *         in: parameter
+ *         required: true
+ *         schema:
+ *           type: string
+ *           description: unique string identifier for item
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieve all items
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 item:
+ *                   $ref: '#/components/schemas/Items'
+ *       '400':
+ *         description: invalid input data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ */
 itemRouter.get(
     "/:id",
     authenticate,
