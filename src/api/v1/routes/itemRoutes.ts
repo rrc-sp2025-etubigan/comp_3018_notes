@@ -7,6 +7,49 @@ import isAuthorized from "../middleware/authorize";
 
 const itemRouter = express.Router();
 
+/**
+ * @openapi
+ * /items:
+ *   post:
+ *     summary: Create new item
+ *     tags: [Items]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - name
+ *               - quantity
+ *               - category
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 maxLength: 24
+ *                 example: "Hammer"
+ *               quantity:
+ *                 type: integer
+ *                 min: 1
+ *                 example: 100
+ *               category:
+ *                 type: string
+ *                 enum: [clothing, tool, food]
+ *                 example: "tool"
+ *     responses:
+ *       '201':
+ *         description: Item created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Items'
+ *       '400':
+ *         description: Invalid input data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ */
 itemRouter.post(
     "/",
     authenticate,
@@ -15,11 +58,63 @@ itemRouter.post(
     itemController.createItemHandler
 );
 
+/**
+ * @openapi
+ * /items:
+ *   get:
+ *     summary: Retrieve all items
+ *     tags: [Items]
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieve all items
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 count:
+ *                   type: integer
+ *                 items:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Items'
+ */
 itemRouter.get(
     "/",
     authenticate,
-    itemController.getAllItemsHandler);
+    itemController.getAllItemsHandler
+);
 
+/**
+ * @openapi
+ * /items/{id}:
+ *   get:
+ *     summary: Retrieve one item by id
+ *     tags: [Items]
+ *     parameters:
+ *       - id:
+ *         in: parameter
+ *         required: true
+ *         schema:
+ *           type: string
+ *           description: unique string identifier for item
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieve all items
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 item:
+ *                   $ref: '#/components/schemas/Items'
+ *       '400':
+ *         description: Invalid input data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ */
 itemRouter.get(
     "/:id",
     authenticate,
@@ -27,6 +122,55 @@ itemRouter.get(
     itemController.getItemByIdHandler
 );
 
+/**
+ * @openapi
+ * /items/{id}:
+ *   put:
+ *     summary: Update one item by id
+ *     tags: [Items]
+ *     parameters:
+ *       - id:
+ *         in: parameter
+ *         required: true
+ *         schema:
+ *           type: string
+ *           description: unique string identifier for item
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 maxLength: 24
+ *                 example: "Wrench"
+ *               quantity:
+ *                 type: integer
+ *                 min: 1
+ *                 example: 200
+ *               category:
+ *                 type: string
+ *                 enum: [clothing, tool, food]
+ *                 example: "food"
+ *     responses:
+ *       '200':
+ *         description: Successfully update one item by id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 item:
+ *                   $ref: '#/components/schemas/Items'
+ *       '400':
+ *         description: Invalid input data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ */
 itemRouter.put(
     "/:id",
     authenticate,
@@ -35,6 +179,36 @@ itemRouter.put(
     itemController.updateItemHandler
 );
 
+/**
+ * @openapi
+ * /items/{id}:
+ *   delete:
+ *     summary: Successfully delete item by id
+ *     tags: [Items]
+ *     parameters:
+ *       - id:
+ *         in: parameter
+ *         required: true
+ *         schema:
+ *           type: string
+ *           description: unique string identifier for item
+ *     responses:
+ *       '200':
+ *         description: Successfully delete item by id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       '400':
+ *         description: Invalid Input Data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ */
 itemRouter.delete(
     "/:id",
     authenticate,
