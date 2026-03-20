@@ -109,7 +109,7 @@ itemRouter.get(
  *                 item:
  *                   $ref: '#/components/schemas/Items'
  *       '400':
- *         description: invalid input data
+ *         description: Invalid input data
  *         content:
  *           application/json:
  *             schema:
@@ -165,7 +165,7 @@ itemRouter.get(
  *                 item:
  *                   $ref: '#/components/schemas/Items'
  *       '400':
- *         description: invalid input data
+ *         description: Invalid input data
  *         content:
  *           application/json:
  *             schema:
