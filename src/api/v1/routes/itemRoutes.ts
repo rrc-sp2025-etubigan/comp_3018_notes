@@ -189,21 +189,21 @@ itemRouter.put(
  *       - id:
  *         in: parameter
  *         required: true
- *           schema:
- *             type: string
- *             description: unique string identifier for item
+ *         schema:
+ *           type: string
+ *           description: unique string identifier for item
  *     responses:
  *       '200':
- *         summary: Successfully delete item by id
- *           content:
- *             application/json:
- *               schema:
- *                 type: object
- *                 properties:
- *                   message:
- *                     type: string
+ *         description: Successfully delete item by id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
  *       '400':
- *         summary: Invalid Input Data
+ *         description: Invalid Input Data
  *         content:
  *           application/json:
  *             schema:
