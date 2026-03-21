@@ -3,3 +3,4 @@ node_modules/*
 comp3018-personal-notes-firebase-adminsdk-fbsvc-8a0ee91b23.json
 logs/
 *.logs
+.env
