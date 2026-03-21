@@ -3,6 +3,9 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+import cors from "cors";
+import { getCorsOptions } from "../config/corsConfig";
+import { getHelmetConfig } from "../config/helmetConfig";
 import setupSwagger from "../config/swagger";
 import {
     accessLogger,
@@ -27,6 +30,8 @@ if (process.env.NODE_ENV === "production") {
     app.use(consoleLogger);
 }
 
+app.use(cors(getCorsOptions()));
+app.use(getHelmetConfig());
 app.use(express.json());
 
 // Route handler for items
